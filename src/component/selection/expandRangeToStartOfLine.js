@@ -19,7 +19,7 @@ const invariant = require('invariant');
  * Return the computed line height, in pixels, for the provided element.
  */
 function getLineHeightPx(element: Element): number {
-  const computed = getComputedStyle(element);
+  const computed = getComputedStyle(element.host ? element.host : element); // TODO check in the lib?
   const div = document.createElement('div');
   div.style.fontFamily = computed.fontFamily;
   div.style.fontSize = computed.fontSize;
@@ -145,7 +145,8 @@ function expandRangeToStartOfLine(range: Range): Range {
     range.setStartBefore(bestContainer);
     if (
       bestContainer.nodeType === 1 &&
-      getComputedStyle((bestContainer: any)).display !== 'inline'
+      getComputedStyle(bestContainer.host ? bestContainer.host : bestContainer)
+        .display !== 'inline'
     ) {
       // The start of the line is never in a different block-level container.
       break;

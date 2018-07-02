@@ -23,7 +23,11 @@ function getSelectionOffsetKeyForNode(node: Node): ?string {
       return offsetKey;
     }
     for (let ii = 0; ii < node.childNodes.length; ii++) {
-      const childOffsetKey = getSelectionOffsetKeyForNode(node.childNodes[ii]);
+      const childOffsetKey = getSelectionOffsetKeyForNode(
+        node.childNodes[ii].shadowRoot
+          ? node.childNodes[ii].shadowRoot.childNodes[0]
+          : node.childNodes[ii],
+      );
       if (childOffsetKey) {
         return childOffsetKey;
       }

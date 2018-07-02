@@ -16,6 +16,7 @@ import type {DOMDerivedSelection} from 'DOMDerivedSelection';
 import type EditorState from 'EditorState';
 
 const getDraftEditorSelectionWithNodes = require('getDraftEditorSelectionWithNodes');
+const getSelection = require('getSelection');
 
 /**
  * Convert the current selection range to an anchor/focus pair of offset keys
@@ -25,7 +26,7 @@ function getDraftEditorSelection(
   editorState: EditorState,
   root: HTMLElement,
 ): DOMDerivedSelection {
-  const selection = global.getSelection();
+  const selection = getSelection();
 
   // No active selection.
   if (selection.rangeCount === 0) {

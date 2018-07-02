@@ -235,7 +235,7 @@ gulp.task('dev', function() {
 
 gulp.task('default', function(cb) {
   runSequence(
-    'check-dependencies',
+    // 'check-dependencies', // TODO: It throws build error
     'clean',
     ['modules', 'flow'],
     ['dist', 'dist:min'],

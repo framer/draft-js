@@ -15,6 +15,7 @@
 import type {FakeClientRect} from 'getRangeBoundingClientRect';
 
 const getRangeBoundingClientRect = require('getRangeBoundingClientRect');
+const getSelection = require('getSelection');
 
 /**
  * Return the bounding ClientRect for the visible DOM selection, if any.
@@ -22,7 +23,7 @@ const getRangeBoundingClientRect = require('getRangeBoundingClientRect');
  * temporarily invalid, return null.
  */
 function getVisibleSelectionRect(global: any): ?FakeClientRect {
-  const selection = global.getSelection();
+  const selection = getSelection();
   if (!selection.rangeCount) {
     return null;
   }

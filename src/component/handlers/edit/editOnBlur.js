@@ -18,6 +18,7 @@ const EditorState = require('EditorState');
 
 const containsNode = require('containsNode');
 const getActiveElement = require('getActiveElement');
+const getSelection = require('getSelection');
 
 function editOnBlur(editor: DraftEditor, e: SyntheticEvent<>): void {
   // In a contentEditable element, when you select a range and then click
@@ -28,8 +29,12 @@ function editOnBlur(editor: DraftEditor, e: SyntheticEvent<>): void {
   // We therefore force the issue to be certain, checking whether the active
   // element is `body` to force it when blurring occurs within the window (as
   // opposed to clicking to another tab or window).
-  if (getActiveElement() === document.body) {
-    const selection = global.getSelection();
+  const activeElement = getActiveElement();
+  if (
+    activeElement === document.body ||
+    activeElement.constructor === ShadowRoot
+  ) {
+    const selection = getSelection();
     const editorNode = editor.editor;
     if (
       selection.rangeCount === 1 &&

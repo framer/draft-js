@@ -22,6 +22,7 @@ const UserAgent = require('UserAgent');
 const findAncestorOffsetKey = require('findAncestorOffsetKey');
 const gkx = require('gkx');
 const nullthrows = require('nullthrows');
+const getSelection = require('getSelection');
 
 const isGecko = UserAgent.isEngine('Gecko');
 
@@ -45,9 +46,9 @@ function editOnInput(editor: DraftEditor): void {
     editor._pendingStateFromBeforeInput = undefined;
   }
 
-  const domSelection = global.getSelection();
+  let domSelection = getSelection();
 
-  const {anchorNode, isCollapsed} = domSelection;
+  let {anchorNode, isCollapsed} = domSelection;
   const isNotTextNode = anchorNode.nodeType !== Node.TEXT_NODE;
   const isNotTextOrElementNode =
     anchorNode.nodeType !== Node.TEXT_NODE &&

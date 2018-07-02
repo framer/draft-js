@@ -24,7 +24,7 @@ function findAncestorOffsetKey(node: Node): ?string {
     if (key != null) {
       return key;
     }
-    searchNode = searchNode.parentNode;
+    searchNode = searchNode.host ? searchNode.host : searchNode.parentNode;
   }
   return null;
 }
