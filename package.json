@@ -21,7 +21,6 @@
   "repository": "facebook/draft-js",
   "license": "BSD-3-Clause",
   "scripts": {
-    "postinstall": "npm install && npm run build && rm -rf ./node_modules",
     "prepublish": "npm run build",
     "pretest": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
     "build": "gulp",
