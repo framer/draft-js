@@ -18,6 +18,7 @@ const expandRangeToStartOfLine = require('expandRangeToStartOfLine');
 const getDraftEditorSelectionWithNodes = require('getDraftEditorSelectionWithNodes');
 const moveSelectionBackward = require('moveSelectionBackward');
 const removeTextWithStrategy = require('removeTextWithStrategy');
+const getSelection = require('getSelection');
 
 function keyCommandBackspaceToStartOfLine(
   editorState: EditorState,
@@ -30,7 +31,7 @@ function keyCommandBackspaceToStartOfLine(
         return moveSelectionBackward(strategyState, 1);
       }
 
-      const domSelection = global.getSelection();
+      const domSelection = getSelection();
       let range = domSelection.getRangeAt(0);
       range = expandRangeToStartOfLine(range);
 

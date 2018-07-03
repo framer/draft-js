@@ -19,6 +19,7 @@ const DraftJsDebugLogging = require('DraftJsDebugLogging');
 const containsNode = require('containsNode');
 const getActiveElement = require('getActiveElement');
 const invariant = require('invariant');
+const getSelection = require('getSelection');
 
 function getAnonymizedDOM(
   node: Node,
@@ -113,11 +114,13 @@ function setDraftEditorSelection(
   // It's possible that the editor has been removed from the DOM but
   // our selection code doesn't know it yet. Forcing selection in
   // this case may lead to errors, so just bail now.
-  if (!containsNode(document.documentElement, node)) {
-    return;
-  }
 
-  const selection = global.getSelection();
+  // Removed since it will not work with multiple roots
+  // if (!containsNode(document.documentElement, node)) {
+  //   return;
+  // }
+
+  const selection = getSelection();
   let anchorKey = selectionState.getAnchorKey();
   let anchorOffset = selectionState.getAnchorOffset();
   let focusKey = selectionState.getFocusKey();

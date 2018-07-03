@@ -24,6 +24,7 @@ const isEventHandled = require('isEventHandled');
 const isSelectionAtLeafStart = require('isSelectionAtLeafStart');
 const nullthrows = require('nullthrows');
 const setImmediate = require('setImmediate');
+const getSelection = require('getSelection');
 
 // When nothing is focused, Firefox regards two characters, `'` and `/`, as
 // commands that should open and focus the "quickfind" search bar. This should
@@ -173,7 +174,7 @@ function editOnBeforeInput(
     // Chrome will also split up a node into two pieces if it contains a Tab
     // char, for no explicable reason. Seemingly caused by this commit:
     // https://chromium.googlesource.com/chromium/src/+/013ac5eaf3%5E%21/
-    const nativeSelection = global.getSelection();
+    const nativeSelection = getSelection();
     // Selection is necessarily collapsed at this point due to earlier check.
     if (
       nativeSelection.anchorNode &&
