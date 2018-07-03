@@ -1,5 +1,4 @@
 static/
-lib/
 node_modules
 website/src/docs/
 npm-debug.log
